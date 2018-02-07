@@ -1,0 +1,28 @@
+{
+  "name": "messenger",
+  "version": "1.0.0",
+  "description": "greeting chatbot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gsduong/greeting-chatbot.git"
+  },
+  "keywords": [
+    "greeting",
+    "chatbot"
+  ],
+  "author": "gsduong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gsduong/greeting-chatbot/issues"
+  },
+  "homepage": "https://github.com/gsduong/greeting-chatbot#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
+}
