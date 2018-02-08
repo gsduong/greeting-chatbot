@@ -94,7 +94,6 @@ function handleMessage(sender_psid, received_message) {
 
 	// Check if the message contains text
 	if (received_message.text) {
-
 		// Create the payload for a basic text message
 		response = {
 			"text": `Chúng tôi vừa nhận được tin nhắn của bạn: "${received_message.text}"`
@@ -114,7 +113,7 @@ function handlePostback(sender_psid, received_postback) {
 	// Set the response based on the postback payload
 	if (payload === 'USER_GETTING_STARTED') {
 		response = {
-			"text": `Xin chào {{user_full_name}} đã đến với TopJob Funny :) Đừng quên để lại số điện thoại của bạn để chúng tôi có thể liên lạc lại sớm nhất có thể!`
+			"text": `TopJob Funny xin chào bạn :) Hãy để lại số điện thoại của bạn để chúng tôi có thể hỗ trợ cho bạn sớm nhất có thể!`
 		}
 	}
 	// Send the message to acknowledge the postback
