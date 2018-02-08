@@ -178,9 +178,9 @@ function sendTypingAction(sender_psid) {
 
 function setupGetStartedButton(res) {
 	var messageData = {
-		"get_started": [{
+		"get_started": {
 			"payload": "USER_GETTING_STARTED"
-		}]
+		}
 	};
 
 	// Start the request
