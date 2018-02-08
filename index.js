@@ -78,8 +78,13 @@ app.get('/webhook', (req, res) => {
 	}
 });
 
+// routes
 app.get('/', (req, res) => {
 	res.status(200).send("It works!");
+});
+app.get('/setup', function(req, res) {
+
+	setupGetStartedButton(res);
 });
 
 // Handles messages events
@@ -92,7 +97,7 @@ function handleMessage(sender_psid, received_message) {
 
 		// Create the payload for a basic text message
 		response = {
-			"text": `You sent the message: "${received_message.text}"`
+			"text": `Chúng tôi vừa nhận được tin nhắn của bạn: "${received_message.text}"`
 		}
 	}
 
@@ -107,13 +112,9 @@ function handlePostback(sender_psid, received_postback) {
 	// Get the payload for the postback
 	let payload = received_postback.payload;
 	// Set the response based on the postback payload
-	if (payload === 'yes') {
+	if (payload === 'USER_GETTING_STARTED') {
 		response = {
-			"text": "Thanks!"
-		}
-	} else if (payload === 'no') {
-		response = {
-			"text": "Oops, try sending another image."
+			"text": `Xin chào {{user_full_name}} đã đến với TopJob Funny :) Đừng quên để lại số điện thoại của bạn để chúng tôi có thể liên lạc lại sớm nhất có thể!`
 		}
 	}
 	// Send the message to acknowledge the postback
@@ -173,4 +174,32 @@ function sendTypingAction(sender_psid) {
 			console.error("Unable to send sender action:" + err);
 		}
 	});
+}
+
+function setupGetStartedButton(res) {
+	var messageData = {
+		"get_started": [{
+			"payload": "USER_GETTING_STARTED"
+		}]
+	};
+
+	// Start the request
+	request({
+			url: 'https://graph.facebook.com/v2.6/me/messenger_profile?access_token=' + process.env.PAGE_ACCESS_TOKEN,
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			form: messageData
+		},
+		function(error, response, body) {
+			if (!error && response.statusCode == 200) {
+				// Print out the response body
+				res.send(body);
+
+			} else {
+				// TODO: Handle errors
+				res.send(body);
+			}
+		});
 }
